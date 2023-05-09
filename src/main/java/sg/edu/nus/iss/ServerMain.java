@@ -19,11 +19,15 @@ public class ServerMain
 {
     public static void main( String[] args ) throws IOException 
     {
-        String fileName = "cookie_file.txt";
         int port = 12345;
-
-        if (args.length > 0) {
-            fileName = args[0];
+        String fileName = "cookie_file.txt";
+        
+        if (args.length == 2) {
+            port = Integer.parseInt(args[0]);
+            fileName = args[1];
+        } else {
+            System.out.println("args[0]: port, args[1]: file");
+            System.exit(1);
         }      
 
         ServerSocket server = new ServerSocket(port);
@@ -32,7 +36,8 @@ public class ServerMain
         File cookieFile = new File(fileName);
 
         if (!cookieFile.exists()) {
-            System.exit(0);;
+            System.out.println("File not found");
+            System.exit(2);;
         }
 
         Cookie cookie = new Cookie();
