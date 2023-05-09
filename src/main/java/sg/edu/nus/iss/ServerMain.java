@@ -31,6 +31,8 @@ public class ServerMain
         }      
 
         ServerSocket server = new ServerSocket(port);
+        System.out.println("Server started. Listening on port " + port);
+
         Socket socket = server.accept();
 
         File cookieFile = new File(fileName);
@@ -47,19 +49,17 @@ public class ServerMain
         InputStream is = socket.getInputStream();
         BufferedInputStream bis = new BufferedInputStream(is);
         DataInputStream dis = new DataInputStream(bis);
-        String clientInput = "";
+        String serverIncoming = "";
 
         OutputStream os = socket.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(os);
         DataOutputStream dos = new DataOutputStream(bos);
-        String serverOutput = "";
 
-        while (!clientInput.equalsIgnoreCase("close")) {
-            clientInput = dis.readUTF();
+        while (!serverIncoming.equalsIgnoreCase("close")) {
+            serverIncoming = dis.readUTF();
 
-            if (clientInput.equalsIgnoreCase("get-cookie")) {
-                dos.writeUTF("cookie-text");
-                dos.writeUTF(serverOutput);
+            if (serverIncoming.equalsIgnoreCase("get-cookie")) {
+                dos.writeUTF("cookie-text " + cookie.getCookie());
                 dos.flush();
             }
         }

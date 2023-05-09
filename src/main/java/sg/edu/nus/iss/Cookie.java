@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Cookie {
 
-    private List<String> cookie = new ArrayList<>();
+    private List<String> cookies = new ArrayList<>();
 
     public void populateCookieList(File cookieFile) throws IOException {
 
@@ -19,7 +19,7 @@ public class Cookie {
         String line;
 
         while ((line = br.readLine()) != null) {
-            cookie.add(line);
+            cookies.add(line);
         } 
         
         br.close();
@@ -29,6 +29,6 @@ public class Cookie {
     public String getCookie() {
 
         Random random = new Random();
-        return cookie.get(random.nextInt(cookie.size() - 1));
+        return cookies.get(random.nextInt(cookies.size() - 1));
     }
 }
