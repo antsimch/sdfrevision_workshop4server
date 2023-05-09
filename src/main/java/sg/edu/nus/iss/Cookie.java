@@ -21,6 +21,9 @@ public class Cookie {
         while ((line = br.readLine()) != null) {
             cookie.add(line);
         } 
+        
+        br.close();
+        fr.close();
     } 
 
     public String getCookie() {
